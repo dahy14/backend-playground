@@ -12,6 +12,12 @@ need 1 more socket for live caption microphone stuff
 
 feb 4
 doing database
+will make schema if design are out
+
+feb 5
+Whiper + transformers js ok are not ok, they are short form version
+but now they will work, or until it breaks on newer version of node-llama-cpp
+I am downloading CUDA support, but now it's fine not to
 
 things to do
 
