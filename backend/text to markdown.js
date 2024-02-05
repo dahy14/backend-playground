@@ -14,10 +14,16 @@ const model = new LlamaModel({
     "ai_models",
     "openhermes-2.5-mistral-7b.Q5_K_S.gguf"
   ),
+  gpuLayers: 33,
 });
 
 //
-const context = new LlamaContext({ model });
+const context = new LlamaContext({
+  model,
+  threads: 15,
+  batchSize: 2048,
+  contextSize: 2048,
+});
 
 //
 const session = new LlamaChatSession({
@@ -25,8 +31,8 @@ const session = new LlamaChatSession({
   // promptWrapper: new LlamaChatPromptWrapper() // use to format the End of Token string. not that important
 });
 
-const prompt =
-  "You are an AI Assistant that only replies in markdown file. Use only the information within the given context and keep each summary to a maximum of 50 words, while for the heading a maximum of 10 words and a minimum of one word. You are to outline a the whole passage in this format. \n";
+const prompt1 =
+  "You are an AI Assistant that only replies in markdown file. Use only the information within the given context and keep each summary to a maximum of 50 words, while for the heading a maximum of 10 words and a minimum of one word. You are to outline a the whole passage in this format. It may sometimes contain typos, misspelled words in it, so take that into account.\n";
 
 const format = ` 
 # ++ **Title** ++
@@ -39,13 +45,13 @@ Write atleast 2 supporting arguments in > bullets
 `;
 
 const userInput =
-  "Oh my, look at that magnificent creature! It's like a fish with legs, swimming through the air! I've never seen anything quite so wondrous in all my life. How does it stay afloat? And what is that sound it makes? It's almost as if it's laughing! This is truly a magical moment for me";
+  "We are notable. Our evolutionary audio note taking up the scent to empower users to capture thoughts, effortless tea. Transform voice recordings into structured notes and streamline knowledge management using state-of-the-art artificial intelligence technology. Our simm- our mission is simple and has personal productivity and facilitates similar collaboration by transcribing spoken words accurately. Generating comprehensive mark-down files and enabling efficient organization of ideas. With notable, users can focus on expressing themselves freely without worrying about manual documentation, allowing them to harness creativity and foster innovation, leveraging advanced feature recognition algorithms.  Notable, intelligently extracts key concepts organized them efficiently and generates well structured markdown output tailored to suit diverse needs. Say goodbye to TD's manual transcription process and hello to instant instant in-muse, insight extraction and actionable notes. Beyond mere transcription capabilities, notable foresters enhanced understanding but automatically categorizing topics highlighting essential elements and establishing logical connections between seemingly unrelated ideas. Should this intuitive approach, users benefit from increased comprehension and improved attention, making notable indispensable for academic pursuits, professional engagements, interviews, brainstorming sessions, and much more. At notable, we strive tirelessly to push technological boundaries, delivering continuous improvements aimed at optimizing users' experience.";
 
 // const a3 = await session.prompt(q1);
 
-const q1 = prompt.concat(format, "\n", "User Input: ", userInput);
-
-console.log("Q1: ", q1);
+const q1 = prompt1.concat(format, "\n", "User Input: ", userInput);
+const start = performance.now();
+// console.log("Q1: ", q1);
 // session.prompt's second param is for stream
 const a1 = await session.prompt(q1, {
   onToken(chunk) {
@@ -54,13 +60,15 @@ const a1 = await session.prompt(q1, {
     console.log(chunk_now);
   },
   // temperature, increase for more creative liberties but it may become more and more random or unhinge
-  temperature: 0.4,
-  topK: 40,
-  topP: 0.4,
+  // temperature: 0.4,
+  // topK: 40,
+  // topP: 0.4,
 });
 // DO NOT CALL a1 FROM OUTSIDE THE DATA STREAM BECAUSE IT WILL BE SLOW.
-
+const end = performance.now();
+console.log(`Execution duration: ${(end - start) / 1000} seconds`);
 console.log("AI: " + a1);
+
 // needs to create a JSON for structured response
 
 // 0.8 40 .02 Oh my, look at that magnificent creature! It's like a fish with legs, swimming through the air! I've never seen anything quite so wondrous in all my life. How does it stay afloat? And what is that sound it makes? It's almost as if it's laughing! This is truly a magical moment for me

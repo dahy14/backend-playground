@@ -10,9 +10,16 @@ Whiper + transformers js ok.
 
 need 1 more socket for live caption microphone stuff
 
+feb 4
+doing database
+
 things to do
+
+> Database
+> CRUD operations
+> endpoints
 
 > socket for generative Markdown
 > Socket for recording strem
+
 > Uploading a wavefile somewhere in the internet
-> endpoints

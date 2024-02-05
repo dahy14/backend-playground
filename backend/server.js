@@ -1,26 +1,44 @@
-const express = require("express");
+import express from "express";
+import cors from "cors";
+import mongoose from "mongoose";
+
+// Modules, put it in ecmascript format
+import { nestedApi } from "./routes/api.js";
+
 const app = express();
-const cors = require("cors");
+// Using database
+/*
+  1. get the uri
+  2. use mongoose.connect
+  3. create a callback when done
+*/
 
-app.use(
-  cors({
-    origin: "http://127.0.0.1:5500",
-    methods: ["GET", "POST"],
-    credentials: true,
-  })
-);
+const uri = "mongodb://127.0.0.1:27017/notable-backend";
 
-app.get("/", (req, res) => {
-  res.send("hello bitch");
-});
+dbConnect(uri)
+  .then(() => console.log("Conencted to the Database"))
+  .catch((err) => console.log(err));
 
-app.get("/data", (req, res) => {
-  res.json({
-    name: "Dahy14",
-    hobby: "Bopping to twice",
+async function dbConnect(uri) {
+  await mongoose.connect(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
   });
-});
+}
 
-app.listen(3000, () => {
-  console.log("Server running at port 3000");
+// Global middleware
+app.use(cors());
+
+// Modularize Requests
+/*
+ 1. make the reqeusts as MIDDLEWARE
+ 2. add a second parameter of where to get the MIDDLEWARE.
+ 3. on the routes. instanciate a router object
+*/
+app.use("/api", nestedApi);
+
+// run Server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server running at port http://localhost:${PORT}`);
 });
