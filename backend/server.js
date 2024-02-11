@@ -1,33 +1,20 @@
 import express from "express";
 import cors from "cors";
-import mongoose from "mongoose";
 
 // Modules, put it in ecmascript format
 import { nestedApi } from "./routes/api.js";
+import { dbConnect } from "./models/mongooseConnect.js";
+import { audioCRUD } from "./routes/audioCRUD.js";
 
 const app = express();
-// Using database
-/*
-  1. get the uri
-  2. use mongoose.connect
-  3. create a callback when done
-*/
-
-const uri = "mongodb://127.0.0.1:27017/notable-backend";
-
-dbConnect(uri)
-  .then(() => console.log("Conencted to the Database"))
-  .catch((err) => console.log(err));
-
-async function dbConnect(uri) {
-  await mongoose.connect(uri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
-}
 
 // Global middleware
 app.use(cors());
+app.use(express.json());
+// delete this later
+dbConnect()
+  .then(() => console.log("Conencted to the Database"))
+  .catch((err) => console.log(err));
 
 // Modularize Requests
 /*
@@ -36,9 +23,9 @@ app.use(cors());
  3. on the routes. instanciate a router object
 */
 app.use("/api", nestedApi);
-
+app.use("/service", audioCRUD);
 // run Server
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 1234;
 app.listen(PORT, () => {
-  console.log(`Server running at port http://localhost:${PORT}`);
+  console.log(`Server running at port http://127.0.0.1:${PORT}`);
 });

@@ -20,12 +20,21 @@ but now they will work, or until it breaks on newer version of node-llama-cpp
 I am downloading CUDA support, but now it's fine not to
 
 things to do
+feb 9
+i hate this this shit, its getting harder and harder to manage
+
+feb 11
+Crud and modularization on speech to text
+
+fix the audio validator in audioCRUD.js
 
 > Database
+
 > CRUD operations
 > endpoints
-
-> socket for generative Markdown
-> Socket for recording strem
+> file server for audio and image
+> Socket for live recording stream
 
 > Uploading a wavefile somewhere in the internet
+> socket for generative Markdown
+> run on gpu// i cannot run on gpu wtf... wait for future updates

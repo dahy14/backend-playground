@@ -17,7 +17,6 @@ const model = new LlamaModel({
   gpuLayers: 33,
 });
 
-//
 const context = new LlamaContext({
   model,
   threads: 15,
@@ -38,14 +37,17 @@ const format = `
 # ++ **Title** ++
 ## ++ Summary ++
 summarized context
-### ++ Write about Sentence about topic 1 ++
+### ++ Write about Sentence about topics ++
 Write at least 2 supporting arguments in > bullets
 ## ++ Counter Arguments ++ 
 Write atleast 2 supporting arguments in > bullets 
+## ++ tags ++
+for the tags, write atleast one per 30 words. In bullets
 `;
+// prompt engineering
 
 const userInput =
-  "We are notable. Our evolutionary audio note taking up the scent to empower users to capture thoughts, effortless tea. Transform voice recordings into structured notes and streamline knowledge management using state-of-the-art artificial intelligence technology. Our simm- our mission is simple and has personal productivity and facilitates similar collaboration by transcribing spoken words accurately. Generating comprehensive mark-down files and enabling efficient organization of ideas. With notable, users can focus on expressing themselves freely without worrying about manual documentation, allowing them to harness creativity and foster innovation, leveraging advanced feature recognition algorithms.  Notable, intelligently extracts key concepts organized them efficiently and generates well structured markdown output tailored to suit diverse needs. Say goodbye to TD's manual transcription process and hello to instant instant in-muse, insight extraction and actionable notes. Beyond mere transcription capabilities, notable foresters enhanced understanding but automatically categorizing topics highlighting essential elements and establishing logical connections between seemingly unrelated ideas. Should this intuitive approach, users benefit from increased comprehension and improved attention, making notable indispensable for academic pursuits, professional engagements, interviews, brainstorming sessions, and much more. At notable, we strive tirelessly to push technological boundaries, delivering continuous improvements aimed at optimizing users' experience.";
+  " We are notable. Our evolutionary audio note taking up the scent to empower users to capture thoughts, effortless tea. Transform voice recordings into structured notes and streamline knowledge management using state-of-the-art artificial intelligence technology. Our simm- our mission is simple and has personal productivity and facilitates similar collaboration by transcribing spoken words accurately. Generating comprehensive mark-down files and enabling efficient organization of ideas. With notable, users can focus on expressing themselves freely without worrying about manual documentation, allowing them to harness creativity and foster innovation, leveraging advanced feature recognition algorithms. Notable, intelligently extracts key concepts organized them efficiently and generates well structured markdown output tailored to suit diverse needs. Say goodbye to TD's manual transcription process and hello to instant instant in-muse, insight extraction and actionable notes. Beyond mere transcription capabilities, notable foresters enhanced understanding but automatically categorizing topics highlighting essential elements and establishing logical connections between seemingly unrelated ideas. Should this intuitive approach, users benefit from increased comprehension and improved attention, making notable indispensable for academic pursuits, professional engagements, interviews, brainstorming sessions, and much more. At notable, we strive tirelessly to push technological boundaries, delivering continuous improvements aimed at optimizing users' experience. Join us today and discover why countless satisfied customers trust notable to elevate their note-taking game, unlock and tap potential and propel them towards unprecedented success. Together let's reshape the future of note-taking and super-change productivity in waste-benefit.possible. Welcome to Notable, where inspiration meets intelligence.";
 
 // const a3 = await session.prompt(q1);
 
@@ -76,3 +78,41 @@ console.log("AI: " + a1);
 // 1.5 40 0.7 My, what a marvelous creature! It seems to glide through the water effortlessly, almost as if it's dancing. The way its body moves...it's mesmerizing. I've never seen anything like it before. How fascinating life can be!
 
 // 0.8 40 .7 Oh my goodness, look at that beautiful creature! It's like a mermaid from one of our fairy tales, gliding through the water with such grace and ease. Its playful nature reminds me of how we would frolic in the woods back home. I never thought I would see something so magical in this world. How wondrous life can be!
+
+/* 
+AI: 
+# Notable: Revolutionizing Note-Taking with AI
+## Summary
+Notable is an AI-powered audio note-taking tool that empowers users to capture thoughts effortlessly and transform voice recordings into structured notes. It streamlines knowledge management by accurately transcribing spoken words, generating comprehensive markdown files, and enabling efficient organization of ideas.
+
+## Write about Sentence about topic 1
+Notable's mission is to simplify personal productivity and facilitate collaboration by leveraging advanced feature recognition algorithms.        
+
+* Accurate transcription capabilities
+* Enhanced understanding through automatic categorization
+* Highlighting essential elements and establishing logical connections
+
+## Counter Arguments
+While Notable offers significant benefits for note-taking, it may not be the best fit for everyone due to:
+
+* Learning curve associated with AI technology
+* Dependence on internet connectivity for real-time transcription TRUE
+* Potential privacy concerns related to storing and processing voice recordings
+
+## Write about Sentence about topic 2 ()
+Notable's intuitive approach benefits users by increasing comprehension and improving attention, making it indispensable for various purposes.    
+
+* Academic pursuits
+* Professional engagements
+* Interviews
+* Brainstorming sessions
+
+## Counter Arguments
+Some users may prefer traditional note-taking methods or alternative digital tools that cater to their specific needs.
+
+* Preference for handwritten notes
+* Familiarity with other digital note-taking apps
+* Specific requirements not met by Notable's features
+
+In conclusion, Notable is an innovative AI-powered tool that aims to revolutionize note-taking and boost productivity. While it offers numerous benefits, it may not be the best fit for everyone due to individual preferences and specific needs.
+*/
