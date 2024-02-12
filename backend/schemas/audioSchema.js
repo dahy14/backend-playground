@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const audioSchema = new mongoose.Schema({
   text: { type: String, required: true },
 
-  chunk: [
+  chunks: [
     {
       timestamp: [Number],
       text: String,

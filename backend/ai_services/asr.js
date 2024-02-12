@@ -38,7 +38,7 @@ async function urlAudio(url) {
   console.log(
     `Speach to text Execution duration: ${(end - start) / 1000} seconds`
   );
-  //console.log(output);
+  console.log(output);
   return Promise.resolve(output);
 }
 

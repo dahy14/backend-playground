@@ -26,8 +26,7 @@ audioCRUD.post("/audio", async (req, res) => {
   // check if the url is already in the database
   try {
     const validator = await AudioModel.findOne({ url });
-    if (validator) return res.status(400).send("User already registered.");
-    return;
+    if (validator) return res.status(400).send("Audio already in Database.");
   } catch (err) {
     console.log(err);
   }
@@ -78,11 +77,27 @@ async function asyncAudio(a) {
 }
 */
 audioCRUD.get("/audio", async (req, res) => {
-  res.json({});
+  try {
+    const data = await AudioModel.find();
+    res.status(200).json(data);
+  } catch (err) {
+    console.log(err);
+  }
 });
 
-audioCRUD.patch("/audio", (req, res) => {});
-
+audioCRUD.patch("/audio/:id", async (req, res) => {
+  const id = req.params.id;
+  const { index, text } = req.body;
+  const audio = await AudioModel.findById(id);
+  audio.chunks[index].text = text;
+  res.status(200).json(audio);
+  await audio.save();
+});
+audioCRUD.delete("/delete-audio/:id", async (req, res) => {
+  const id = req.params.id;
+  await AudioModel.findOneAndDelete(id).exec();
+  res.status(204).send("Deleted");
+});
 export { audioCRUD };
 
 // {

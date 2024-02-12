@@ -8,9 +8,7 @@ import mongoose from "mongoose";
 */
 
 async function dbConnect(uri = "mongodb://127.0.0.1:27017/test") {
-  await mongoose.connect(uri, {
-    useUnifiedTopology: true,
-  });
+  await mongoose.connect(uri);
 }
 
 export { dbConnect };

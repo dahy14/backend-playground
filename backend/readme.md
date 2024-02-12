@@ -28,6 +28,11 @@ Crud and modularization on speech to text
 
 fix the audio validator in audioCRUD.js
 
+feb 12
+audio endpoints ok
+
+fix notes endpoints
+
 > Database
 
 > CRUD operations
