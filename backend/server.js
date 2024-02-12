@@ -2,9 +2,10 @@ import express from "express";
 import cors from "cors";
 
 // Modules, put it in ecmascript format
-import { nestedApi } from "./routes/api.js";
+
 import { dbConnect } from "./models/mongooseConnect.js";
 import { audioCRUD } from "./routes/audioCRUD.js";
+import { noteCRUD } from "./routes/noteCRUD.js";
 
 const app = express();
 
@@ -22,8 +23,10 @@ dbConnect()
  2. add a second parameter of where to get the MIDDLEWARE.
  3. on the routes. instanciate a router object
 */
-app.use("/api", nestedApi);
-app.use("/service", audioCRUD);
+app.use("/service", [audioCRUD, noteCRUD]);
+// app.use("/service", audioCRUD);
+// app.use("/service", noteCRUD);
+
 // run Server
 const PORT = process.env.PORT || 1234;
 app.listen(PORT, () => {

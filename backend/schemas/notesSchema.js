@@ -1,17 +1,13 @@
 import mongoose from "mongoose";
-import { audioSchema } from "./audioSchema";
 
 const noteSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: true,
-    unique: true,
-  },
+  title: String,
   content: String,
+
   tags: [String],
-  audio: [audioSchema],
+  audio: { type: mongoose.Schema.Types.ObjectId, ref: "Audio" },
 });
 
-const Note = mongoose.model("Note", noteSchema);
+const NoteModel = mongoose.model("Note", noteSchema);
 
-export { Note };
+export { NoteModel };

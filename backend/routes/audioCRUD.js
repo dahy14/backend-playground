@@ -17,7 +17,7 @@ import { AudioModel } from "../schemas/audioSchema.js";
 
 const router = express.Router();
 
-//nested routes from "/"
+//nested routes
 const audioCRUD = express.Router();
 
 audioCRUD.post("/audio", async (req, res) => {
@@ -42,8 +42,8 @@ audioCRUD.post("/audio", async (req, res) => {
       data: audioToDB,
     });
     // pushing the audio to the database
-    let audio = new AudioModel(audioToDB);
-    let newAudio = await audio.save();
+    const audio = new AudioModel(audioToDB);
+    const newAudio = await audio.save();
     console.log("New audio saved to the database. \n", newAudio);
   } catch (err) {
     console.log(err);

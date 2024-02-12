@@ -12,11 +12,11 @@ const audioSchema = new mongoose.Schema({
 
   url: {
     type: String,
-    unique: true,
+    // unique: true,
     required: [true, "url required"],
   },
 });
 
 const AudioModel = mongoose.model("Audio", audioSchema);
 
-export { AudioModel };
+export { audioSchema, AudioModel };
