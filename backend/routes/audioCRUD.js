@@ -28,6 +28,7 @@ audioCRUD.post("/audio", async (req, res) => {
     const validator = await AudioModel.findOne({ url });
     if (validator) return res.status(400).send("Audio already in Database.");
   } catch (err) {
+    res.status(400).send("Error checking the database for audio");
     console.log(err);
   }
 
@@ -37,15 +38,17 @@ audioCRUD.post("/audio", async (req, res) => {
     let data = await urlAudio(url);
     audioToDB = data;
     audioToDB.url = url;
-    res.status(201).json({
-      status: "success",
-      data: audioToDB,
-    });
+
     // pushing the audio to the database
     const audio = new AudioModel(audioToDB);
-    const newAudio = await audio.save();
-    console.log("New audio saved to the database. \n", newAudio);
+    await audio.save();
+
+    res.status(201).json({
+      status: "success",
+      data: audio,
+    });
   } catch (err) {
+    res.status(400).send("Error creating audio");
     console.log(err);
   }
   //   Backup code, much worse to read
@@ -81,11 +84,12 @@ audioCRUD.get("/audio", async (req, res) => {
     const data = await AudioModel.find();
     res.status(200).json(data);
   } catch (err) {
+    res.status(400).send("Error getting audio");
     console.log(err);
   }
 });
 
-audioCRUD.patch("/audio/:id", async (req, res) => {
+audioCRUD.patch("/edit-audio/:id", async (req, res) => {
   const id = req.params.id;
   const { index, text } = req.body;
   const audio = await AudioModel.findById(id);
@@ -99,24 +103,3 @@ audioCRUD.delete("/delete-audio/:id", async (req, res) => {
   res.status(204).send("Deleted");
 });
 export { audioCRUD };
-
-// {
-//     "text": "We are notable. Our evolutionary audio note taking up the scent to empower users to capture thoughts,",
-//     "chunk": [
-//         {
-//             "timestamp": [
-//                 0,
-//                 3
-//             ],
-//             "text": "We are notable."
-//         },
-//         {
-//             "timestamp": [
-//                 3,
-//                 6
-//             ],
-//             "text": "Our evolutionary audio note taking up the scent to empower users to capture thoughts"
-//         }
-//     ],
-//     "url": "https://drive.usercontent.google.com/download?id=14I77u-gPbtiojes8nM6Z1FpmqOM_sQvV&export=download&authuser=2&confirm=t&uuid=914027eb-9426-4bee-828a-a9e50201db52&at=APZUnTVxintJWooKaQm8BLTDQ1X0:1707617146651"
-// }

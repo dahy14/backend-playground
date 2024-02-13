@@ -37,9 +37,12 @@ fix notes endpoints
 
 > CRUD operations
 > endpoints
-> file server for audio and image
-> Socket for live recording stream
+> --
 
+> file server for audio and image
+> --  
+> Socket for live recording stream
+> -- sssss
 > Uploading a wavefile somewhere in the internet
 > socket for generative Markdown
 > run on gpu// i cannot run on gpu wtf... wait for future updates

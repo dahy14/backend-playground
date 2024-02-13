@@ -44,9 +44,27 @@ Summarized notes
 2. Others might say that not everyone is able to contribute equally due to various circumstances
 3. Critics could claim that this mindset perpetuates individualism over collective action
  */
-async function formatToDB(userInput) {
-  const title = userInput.split("# **title**");
-  return Promise.resolve({ title, content, tags });
+async function formatToDB(s) {
+  const titleIndex = s.indexOf("Title");
+  const tagIndex = s.indexOf("Tag");
+  const sumIndex = s.indexOf("Summary");
+
+  // some weird magic number to annoy people reading it. very very arbitrary and can be modified depending on the input
+  let title = s.slice(titleIndex + 5, tagIndex - 3);
+  let tags = s.slice(tagIndex + 4, sumIndex - 4);
+  let summary = s.slice(sumIndex - 3);
+
+  const Title = title.match(/[a-zA-Z](.*)/g);
+  const Tag = tags.match(/[\w\s]+(?=,|\n|$)/g);
+  //  console.log(Title.toString());
+  // console.log(Tag);
+  // console.log(summary);
+
+  title = Title.toString().trim();
+  tags = Tag.map((tag) => tag.trim());
+  const content = summary;
+  // console.log(title, tags);
+  return Promise.resolve({ title, tags, content });
 }
 
 export { formatToDB };
