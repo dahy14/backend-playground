@@ -51,34 +51,8 @@ audioCRUD.post("/audio", async (req, res) => {
     res.status(400).send("Error creating audio");
     console.log(err);
   }
-  //   Backup code, much worse to read
-  //     asyncUrlAudio(url)
-  //       .then((data) => {
-  //         audioToDB = data;
-  //         audioToDB.url = url;
-  //         res.status(201).json({
-  //           status: "success",
-  //           data: audioToDB,
-  //         });
-  //         // pushing the audio to the database
-  //         let audio = new AudioModel(audioToDB);
-  //         asyncAudio(audio).then(() => {
-  //           console.log("New audio saved to the database");
-  //         });
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       });
 });
 
-/*
-async function asyncUrlAudio(url) {
-  return await urlAudio(url);
-}
-async function asyncAudio(a) {
-  return await a.save();
-}
-*/
 audioCRUD.get("/audio", async (req, res) => {
   try {
     const data = await AudioModel.find();

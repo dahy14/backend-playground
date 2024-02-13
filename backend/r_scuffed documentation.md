@@ -40,6 +40,7 @@ TODO
 
 > file server for audio and image
 > Socket for live recording stream
+> make it run on every audio file (mp3, flac, etc)
 > -- sssss
 
 > modularize every crud requests on each routes.
