@@ -12,7 +12,8 @@ const app = express();
 // Global middleware
 app.use(cors());
 app.use(express.json());
-// delete this later
+
+// find this later
 dbConnect()
   .then(() => console.log("Conencted to the Database"))
   .catch((err) => console.log(err));
